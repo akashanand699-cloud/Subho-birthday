@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday · Subhoooooo · May 31</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:   #ff7eb3;
+      --blue:   #7eb8ff;
+      --purple: #a07cff;
+      --yellow: #ffd166;
+      --cream:  #fff9f5;
+      --deep:   #1e1433;
+      --card:   #ffffff;
+      --soft:   #f3eeff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--deep);
+      font-family: 'Nunito', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── CONFETTI CANVAS ── */
+    #confetti-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 9;
+    }
+
+    /* ── INTRO ── */
+    #intro {
+      position: fixed; inset: 0; z-index: 999;
+      background: var(--deep);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 2rem;
+      transition: opacity 1.2s ease, visibility 1.2s ease;
+    }
+    #intro.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .intro-emoji { font-size: 3.5rem; animation: bounceIn 0.8s ease; }
+
+    #intro h1 {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      color: var(--pink);
+      margin: 1rem 0 0.5rem;
+      animation: fadeUp 1s 0.3s ease both;
+    }
+    #intro p {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      color: #c4b8e0;
+      line-height: 1.9;
+      animation: fadeUp 1s 0.6s ease both;
+      opacity: 0;
+    }
+    #intro p:nth-child(4) { animation-delay: 0.9s; }
+
+    #skip-btn {
+      margin-top: 2.5rem;
+      padding: 0.65rem 2.2rem;
+      border: 2px solid var(--pink);
+      background: transparent;
+      color: var(--pink);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      border-radius: 50px;
+      animation: fadeUp 1s 1.4s ease both;
+      opacity: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+    #skip-btn:hover { background: var(--pink); color: var(--deep); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 5rem 2rem;
+      background: linear-gradient(160deg, #fff9f5 0%, #f3eeff 50%, #fff0f7 100%);
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(126,184,255,0.15) 0%, transparent 55%),
+                  radial-gradient(ellipse at 75% 60%, rgba(255,126,179,0.15) 0%, transparent 55%);
+    }
+
+    .bhai-behn-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: white;
+      border-radius: 50px;
+      padding: 0.5rem 1.3rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--purple);
+      box-shadow: 0 4px 20px rgba(160,124,255,0.2);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+    .bhai-behn-badge span { font-size: 1.1rem; }
+
+    .hero-name {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(4rem, 18vw, 10rem);
+      font-weight: 700;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 50%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      color: #7a6a99;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+    .hero-date {
+      margin-top: 2rem;
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: white;
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 0.6rem 1.8rem;
+      border-radius: 50px;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 5rem 1.5rem;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .tag {
+      display: inline-block;
+      background: var(--soft);
+      color: var(--purple);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      color: var(--deep);
+    }
+
+    /* ── MEMORY CARDS ── */
+    .memory-grid { display: grid; gap: 1.2rem; margin-top: 2.5rem; }
+
+    .memory-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.8rem;
+      text-align: left;
+      box-shadow: 0 6px 24px rgba(30,20,51,0.07);
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      border-left: 4px solid transparent;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .memory-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(30,20,51,0.12); }
+    .memory-card:nth-child(1) { border-color: var(--pink); }
+    .memory-card:nth-child(2) { border-color: var(--blue); }
+    .memory-card:nth-child(3) { border-color: var(--purple); }
+    .memory-card:nth-child(4) { border-color: var(--yellow); }
+
+    .mc-icon { font-size: 2rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .mc-title { font-weight: 800; font-size: 1.05rem; color: var(--deep); margin-bottom: 0.3rem; }
+    .mc-desc { font-size: 0.93rem; color: #7a6a99; line-height: 1.7; }
+
+    /* ── BOND STATS ── */
+    #bond-section {
+      background: linear-gradient(135deg, var(--deep) 0%, #2e1a5a 100%);
+      padding: 5rem 1.5rem;
+    }
+    .bond-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .bond-inner .tag { background: rgba(255,255,255,0.1); color: var(--pink); }
+    .bond-inner .section-title { color: white; }
+
+    .stats-grid { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem; }
+    .stat-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 1.8rem 1.5rem;
+      min-width: 130px; flex: 1; max-width: 160px;
+      transition: background 0.3s;
+    }
+    .stat-card:hover { background: rgba(255,255,255,0.12); }
+    .stat-num {
+      font-family: 'Caveat', cursive;
+      font-size: 2.8rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--pink), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: #c4b8e0; margin-top: 0.4rem; }
+
+    /* ── LETTER ── */
+    #letter-section { padding: 5rem 1.5rem; max-width: 680px; margin: 0 auto; }
+
+    .letter-wrapper {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 16px 60px rgba(30,20,51,0.1);
+    }
+
+    .letter-header {
+      background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+      padding: 2.5rem 2rem;
+      text-align: center; color: white;
+    }
+    .letter-header h2 {
+      font-family: 'Caveat', cursive;
+      font-size: 2.5rem; font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .letter-header p { opacity: 0.85; font-size: 0.88rem; letter-spacing: 0.15em; }
+
+    .seal-area { text-align: center; padding: 2rem; }
+    .letter-seal {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 6px 24px rgba(255,126,179,0.4);
+    }
+    .letter-seal:hover { transform: scale(1.1) rotate(-8deg); box-shadow: 0 10px 36px rgba(255,126,179,0.55); }
+    .seal-hint { font-size: 0.78rem; letter-spacing: 0.2em; color: var(--purple); text-transform: uppercase; margin-top: 0.6rem; }
+
+    .letter-body-wrap {
+      display: none;
+      padding: 0 2rem 2.5rem;
+      animation: fadeUp 0.7s ease forwards;
+    }
+    .letter-body-wrap.open { display: block; }
+
+    .letter-divider { height: 1px; background: linear-gradient(90deg, transparent, #e0d4ff, transparent); margin: 0 0 2rem; }
+
+    .letter-para {
+      font-size: 1rem;
+      color: #4a3f6b;
+      line-height: 1.9;
+      margin-bottom: 1.1rem;
+    }
+    .letter-para .highlight {
+      background: linear-gradient(120deg, rgba(255,126,179,0.2), rgba(255,126,179,0.1));
+      padding: 0.1em 0.3em; border-radius: 4px;
+      font-weight: 700; color: var(--deep);
+    }
+
+    .letter-sign {
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px dashed #e0d4ff;
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem; color: var(--purple);
+      font-weight: 700;
+    }
+    .letter-sign p { font-family: 'Nunito', sans-serif; font-size: 0.88rem; color: #a09cc0; font-weight: 400; margin-top: 0.3rem; }
+
+    /* ── WISHES ── */
+    .wishes-section {
+      padding: 5rem 1.5rem;
+      background: var(--soft);
+    }
+    .wishes-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+
+    .wishes-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2.5rem; }
+    .wish-pill {
+      background: white;
+      border-radius: 50px;
+      padding: 0.7rem 1.4rem;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--deep);
+      box-shadow: 0 4px 16px rgba(30,20,51,0.07);
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .wish-pill:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(30,20,51,0.12); }
+
+    /* ── CLOSING ── */
+    #closing {
+      min-height: 70vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 5rem 2rem;
+      background: var(--deep);
+      position: relative; overflow: hidden;
+    }
+    #closing::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(255,126,179,0.12) 0%, transparent 65%);
+    }
+
+    .closing-small { font-size: 0.82rem; letter-spacing: 0.35em; text-transform: uppercase; color: #a09cc0; margin-bottom: 1rem; }
+    .closing-name {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(3.5rem, 14vw, 8rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    .closing-msg { color: #c4b8e0; font-size: clamp(0.95rem, 2.5vw, 1.15rem); margin-top: 1rem; line-height: 1.9; }
+    .closing-icons { font-size: 2.5rem; margin-top: 1.5rem; animation: pulse 2s infinite; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounceIn {
+      0%   { transform: scale(0.3); opacity: 0; }
+      60%  { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .float-anim { animation: float 3.5s ease-in-out infinite; }
+
+    .reveal {
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-emoji">🫂</div>
+  <h1>Subhoooooo! 🎂</h1>
+  <p>Behen ka birthday hai aaj…</p>
+  <p>aur bhai ne kuch special banaya hai 💙</p>
+  <button id="skip-btn">Open the surprise ✨</button>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="bhai-behn-badge reveal"><span>👫</span> Bhai &amp; Behn Forever</div>
+  <h1 class="hero-name reveal float-anim">Subhoooooo</h1>
+  <p class="hero-sub reveal">God bless you, behnnaaaaaa! 🫶</p>
+  <div class="hero-date reveal">🎂 Happy Birthday · May 31st 🥳</div>
+</section>
+
+<!-- OUR BOND -->
+<div class="section">
+  <div class="tag reveal">Our Story</div>
+  <h2 class="section-title reveal">How It All Started 😂</h2>
+  <div class="memory-grid" style="margin-top:2.5rem;">
+    <div class="memory-card reveal reveal-delay-1">
+      <div class="mc-icon">🎲</div>
+      <div>
+        <div class="mc-title">One Random Decision</div>
+        <div class="mc-desc">One random day we just decided to become brother and sister — and since then there has been absolutely no going back. 😂</div>
+      </div>
+    </div>
+    <div class="memory-card reveal reveal-delay-2">
+      <div class="mc-icon">🔪😭</div>
+      <div>
+        <div class="mc-title">Murder Plans & Killer Ideas</div>
+        <div class="mc-desc">In the beginning, you genuinely scared me with your murder plans and killer ideas. The worst part was the way you used to explain them — it sounded so real and natural that I was like, "Should I be worried for my life?" 😰🤣</div>
+      </div>
+    </div>
+    <div class="memory-card reveal reveal-delay-3">
+      <div class="mc-icon">☕✨</div>
+      <div>
+        <div class="mc-title">Bitching & Chugali Sessions</div>
+        <div class="mc-desc">Even though we're not super close and don't talk every single day, doing bitching and chugali with you hits different 😌☕✨. No cap.</div>
+      </div>
+    </div>
+    <div class="memory-card reveal">
+      <div class="mc-icon">❤️</div>
+      <div>
+        <div class="mc-title">Always There</div>
+        <div class="mc-desc">You're one of those people I can always talk to comfortably. For the laughs, the drama, the random talks — you're just awesome, behnnaaaaaa.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOND STATS -->
+<div id="bond-section">
+  <div class="bond-inner">
+    <div class="tag reveal">Almost 3 Years 🎉</div>
+    <h2 class="section-title reveal">This Crazy, Weird & Amazing Bond</h2>
+    <div class="stats-grid">
+      <div class="stat-card reveal reveal-delay-1">
+        <div class="stat-num">~3</div>
+        <div class="stat-label">Years Together</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-2">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Laugh Moments</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-3">
+        <div class="stat-num">💯</div>
+        <div class="stat-label">Real Bond</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Best Behen</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LETTER -->
+<div id="letter-section">
+  <div class="tag reveal" style="margin-bottom:1.5rem;">Birthday Letter 💌</div>
+  <div class="letter-wrapper reveal">
+    <div class="letter-header">
+      <h2>Subhoooooo 🎂🥳</h2>
+      <p>May 31st · From Your Bhai</p>
+    </div>
+    <div class="seal-area">
+      <div class="letter-seal float-anim" id="seal">💌</div>
+      <p class="seal-hint">Tap to open ✦</p>
+    </div>
+    <div class="letter-body-wrap" id="letter">
+      <div class="letter-divider"></div>
+      <p class="letter-para">
+        <span class="highlight">Happy Birthday Subhoooooo 🎂🥳❤️</span>
+      </p>
+      <p class="letter-para">
+        God bless you, behnnaaaaaa! 🫶
+      </p>
+      <p class="letter-para">
+        It's still funny how <span class="highlight">one random day we just decided to become brother and sister</span> and since then there has been absolutely no going back 😂. In the beginning, you genuinely scared me with your murder plans and killer ideas 😭🔪. The worst part was the way you used to explain them, it sounded so real and natural that I was like, "Should I be worried for my life?" 😰🤣
+      </p>
+      <p class="letter-para">
+        Even though we're not super close and don't talk every single day, <span class="highlight">I really care about you</span>. You're one of those people I can always talk to comfortably. And honestly, doing bitching and chugali with you hits different 😌☕✨.
+      </p>
+      <p class="letter-para">
+        It's been <span class="highlight">almost 3 years</span> of this crazy, weird, and amazing bond, and I'm really grateful for it. Thank you for always being there, for the laughs, the drama, the random talks, and for being such an awesome behnnaaaaaa ❤️.
+      </p>
+      <p class="letter-para">
+        Wishing you lots of <strong>happiness, success, peace, good health</strong>, and all the wonderful things you deserve in life.
+      </p>
+      <p class="letter-para">
+        Lots and lots of love, behnnaaaaaa! 🫂❤️🎉
+      </p>
+      <p class="letter-para" style="font-weight:800; color: var(--deep);">
+        Enjoy your day to the fullest! ✨🥳
+      </p>
+      <div class="letter-sign">
+        — Tera Bhai 💙
+        <p>Always in your corner ✦</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WISHES -->
+<div class="wishes-section">
+  <div class="wishes-inner">
+    <div class="tag reveal">Birthday Wishes 🌟</div>
+    <h2 class="section-title reveal">Everything You Deserve</h2>
+    <div class="wishes-grid">
+      <div class="wish-pill reveal">😊 Loads of Happiness</div>
+      <div class="wish-pill reveal reveal-delay-1">🚀 Success Everywhere</div>
+      <div class="wish-pill reveal reveal-delay-2">☮️ Inner Peace</div>
+      <div class="wish-pill reveal reveal-delay-3">💪 Good Health</div>
+      <div class="wish-pill reveal">🎯 All Your Dreams</div>
+      <div class="wish-pill reveal reveal-delay-1">☕ Chugali Sessions</div>
+      <div class="wish-pill reveal reveal-delay-2">😂 Endless Laughs</div>
+      <div class="wish-pill reveal reveal-delay-3">🫂 Bhai Ka Pyar</div>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<section id="closing">
+  <p class="closing-small">may 31st · forever remembered</p>
+  <div class="closing-name">Subhoooooo</div>
+  <p class="closing-msg">It was a random day when we chose each other.<br>Glad we did. 💙</p>
+  <div class="closing-icons">🫂❤️🎉</div>
+</section>
+
+<script>
+  /* ── INTRO ── */
+  document.getElementById('skip-btn').addEventListener('click', () => {
+    document.getElementById('intro').classList.add('hidden');
+    launchConfetti();
+  });
+  setTimeout(() => {
+    document.getElementById('intro').classList.add('hidden');
+    launchConfetti();
+  }, 6000);
+
+  /* ── LETTER SEAL ── */
+  document.getElementById('seal').addEventListener('click', () => {
+    const l = document.getElementById('letter');
+    l.classList.toggle('open');
+    document.getElementById('seal').textContent = l.classList.contains('open') ? '💝' : '💌';
+  });
+
+  /* ── SCROLL REVEAL ── */
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal, .memory-card, .stat-card, .wish-pill').forEach(el => obs.observe(el));
+
+  /* ── CONFETTI ── */
+  function launchConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#ff7eb3','#7eb8ff','#a07cff','#ffd166','#ff6b6b','#51cf66'];
+    const pieces = Array.from({length: 120}, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * -canvas.height,
+      r: Math.random() * 7 + 4,
+      d: Math.random() * 3 + 1,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      tilt: Math.random() * 10 - 5,
+      tiltAngle: 0,
+      tiltSpeed: Math.random() * 0.1 + 0.05
+    }));
+
+    let frame = 0;
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        p.y += p.d;
+        p.tiltAngle += p.tiltSpeed;
+        p.x += Math.sin(p.tiltAngle) * 1.5;
+        if (p.y > canvas.height) { p.y = -10; p.x = Math.random() * canvas.width; }
+      });
+      frame++;
+      if (frame < 300) requestAnimationFrame(draw);
+      else { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+    }
+    draw();
+  }
+</script>
+</body>
+</html>
